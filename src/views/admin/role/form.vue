@@ -22,6 +22,11 @@
             v-model="form.roleDesc"
         ></el-input>
       </el-form-item>
+      <el-form-item :label="$t('sysrole.data_authority')" prop="dataAuthority">
+        <el-select :placeholder="$t('sysrole.please_select')" class="w100" clearable v-model="form.dataScope">
+          <el-option :key="item.value" :label="item.label" :value="item.value" v-for="item in dataForm.dataScopes" />
+        </el-select>
+      </el-form-item>
     </el-form>
     <template #footer>
 			<span class="dialog-footer">
@@ -57,6 +62,7 @@ const form = reactive({
   roleCode: '',
   roleDesc: '',
   dsScope: '',
+  dataScope: '1',
 });
 
 // 页面对应元数据
@@ -68,6 +74,13 @@ const dataForm = reactive({
     label: 'name',
     value: 'id',
   },
+  dataScopes: [
+    {value: '1', label: '全部数据权限'},
+    {value: '2', label: '自定数据权限'},
+    {value: '3', label: '部门数据权限'},
+    {value: '4', label: '部门及以下数据权限'},
+    {value: '5', label: '仅本人数据权限'},
+  ]
 });
 
 // 定义校验规则
