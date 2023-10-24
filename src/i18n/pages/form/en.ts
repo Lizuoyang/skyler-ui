@@ -23,6 +23,10 @@ export default {
 		confirmButtonText: 'Confirm',
 		cancelButtonText: 'Cancel',
 		download: 'Download',
+		notNull: "Can not be empty",
+		pleaseSelect: "Please Select",
+		enable: "Enable",
+		disable: "Disable",
 	},
 	message: {
 		box: {

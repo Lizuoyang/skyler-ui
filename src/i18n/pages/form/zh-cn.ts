@@ -25,6 +25,7 @@ export default {
 		pleaseSelect: '请选择',
 		enable: "启 用",
 		disable: "禁 用",
+		notNull: "不能为空"
 	},
 	message: {
 		box: {
