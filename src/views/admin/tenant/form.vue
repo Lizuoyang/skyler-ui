@@ -3,55 +3,55 @@
       :close-on-click-modal="false" draggable>
       <el-form ref="dataFormRef" :model="form" :rules="dataRules" formDialogRef label-width="90px" v-loading="loading">
        <el-row :gutter="24">
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.name')" prop="name">
         <el-input v-model="form.name" :placeholder="$t('teant.inputNameTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.contactUserId')" prop="contactUserId">
         <el-input v-model="form.contactUserId" :placeholder="$t('teant.inputContactUserIdTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.contactName')" prop="contactName">
         <el-input v-model="form.contactName" :placeholder="$t('teant.inputContactNameTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.contactMobile')" prop="contactMobile">
         <el-input v-model="form.contactMobile" :placeholder="$t('teant.inputContactMobileTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.status')" prop="status">
         <el-input v-model="form.status" :placeholder="$t('teant.inputStatusTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.domain')" prop="domain">
         <el-input v-model="form.domain" :placeholder="$t('teant.inputDomainTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.packageId')" prop="packageId">
         <el-input v-model="form.packageId" :placeholder="$t('teant.inputPackageIdTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.expireTime')" prop="expireTime">
         <el-input v-model="form.expireTime" :placeholder="$t('teant.inputExpireTimeTip')"/>
       </el-form-item>
       </el-col>
 
-    <el-col :span="12" class="mb20">
+    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('teant.accountCount')" prop="accountCount">
         <el-input v-model="form.accountCount" :placeholder="$t('teant.inputAccountCountTip')"/>
       </el-form-item>
@@ -71,7 +71,7 @@
 <script setup lang="ts" name="SysTenantDialog">
 import { useDict } from '/@/hooks/dict';
 import { useMessage } from "/@/hooks/message";
-import { getObj, addObj, putObj } from '/@/api/admin/teant'
+import { getObj, addObj, putObj } from '/@/api/admin/tenant'
 import { rule } from '/@/utils/validate';
 import {useI18n} from 'vue-i18n';
 const emit = defineEmits(['refresh']);
