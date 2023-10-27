@@ -125,7 +125,7 @@
         }
 
         loading.value = true;
-        fetchTenantPackageTree(form.id)
+        fetchTenantPackageTree(form.id ? form.id : '-1')
             .then((res) => {
                 checkedKeys.value = res.data;
                 return pageList();
@@ -147,6 +147,8 @@
 
         try {
             loading.value = true;
+            const menuIds = menuTree.value.getCheckedKeys().join(',').concat(',').concat(menuTree.value.getHalfCheckedKeys().join(','));
+            form.menuIds = menuIds;
             form.id ? await putObj(form) : await addObj(form);
             useMessage().success(t(form.id ? 'common.editSuccessText' : 'common.addSuccessText'));
             visible.value = false;

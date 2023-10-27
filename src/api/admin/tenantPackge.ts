@@ -41,7 +41,7 @@ export function putObj(obj?: Object) {
 
 export const fetchTenantPackageTree = (tenantPackageId: string) => {
   return request({
-    url: '/admin/menu/tenantPackge/tree/' + tenantPackageId,
+    url: '/admin/menu/tenant/tree/' + tenantPackageId,
     method: 'get',
   });
 };

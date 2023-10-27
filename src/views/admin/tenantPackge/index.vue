@@ -3,12 +3,9 @@
     <div class="layout-padding-auto layout-padding-view">
       <el-row v-show="showSearch">
         <el-form :model="state.queryForm" ref="queryRef" :inline="true" @keyup.enter="getDataList">
-      <el-form-item :label="$t('tenantPackge.name')" prop="name" >
-        <el-input :placeholder="$t('tenantPackge.inputNameTip')" v-model="state.queryForm.name" />
-      </el-form-item>
-      <el-form-item :label="$t('tenantPackge.status')" prop="status" >
-        <el-input :placeholder="$t('tenantPackge.inputStatusTip')" v-model="state.queryForm.status" />
-      </el-form-item>
+          <el-form-item :label="$t('tenantPackge.name')" prop="name" >
+            <el-input :placeholder="$t('tenantPackge.inputNameTip')" v-model="state.queryForm.name" />
+          </el-form-item>
           <el-form-item>
             <el-button icon="search" type="primary" @click="getDataList">
               {{ $t('common.queryBtn') }}
@@ -40,7 +37,11 @@
         <el-table-column type="index" label="#" width="40" />
           <el-table-column prop="name" :label="$t('tenantPackge.name')"  show-overflow-tooltip/>
           <el-table-column prop="remark" :label="$t('tenantPackge.remark')"  show-overflow-tooltip/>
-          <el-table-column prop="status" :label="$t('tenantPackge.status')"  show-overflow-tooltip/>
+        <el-table-column prop="status" :label="$t('tenantPackge.status')"  show-overflow-tooltip>
+          <template #default="scope">
+            <el-switch v-model="scope.row.status" @change="changeSwitch(scope.row)" :active-value="0" :inactive-value="1"></el-switch>
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('common.action')" width="150">
           <template #default="scope">
             <el-button icon="edit-pen" text type="primary" v-auth="'admin_tenantPackge_edit'"
@@ -60,7 +61,7 @@
 
 <script setup lang="ts" name="systemSysTenantPackage">
 import { BasicTableProps, useTable } from "/@/hooks/table";
-import { fetchList, delObjs } from "/@/api/admin/tenantPackge";
+import { fetchList, delObjs, putObj } from "/@/api/admin/tenantPackge";
 import { useMessage, useMessageBox } from "/@/hooks/message";
 import { useDict } from '/@/hooks/dict';
 import { useI18n } from 'vue-i18n';
@@ -115,6 +116,13 @@ const selectionChangHandle = (objs: { id: string }[]) => {
   multiple.value = !objs.length;
 };
 
+//表格内开关 (用户状态)
+const changeSwitch = async (row: object) => {
+  await putObj(row);
+  useMessage().success(t('common.optSuccessText'));
+  getDataList();
+};
+
 // 删除操作
 const handleDelete = async (ids: string[]) => {
   try {
@@ -126,7 +134,7 @@ const handleDelete = async (ids: string[]) => {
   try {
     await delObjs(ids);
     getDataList();
-    useMessage().success(t('delSuccessText'));
+    useMessage().success(t('common.delSuccessText'));
   } catch (err: any) {
     useMessage().error(err.msg);
   }
