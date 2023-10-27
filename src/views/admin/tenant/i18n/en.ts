@@ -1,5 +1,5 @@
 export default {
-   teant: {
+   tenant: {
         index: '#',
         importsysTenantTip: 'import SysTenant',
         id: 'id',

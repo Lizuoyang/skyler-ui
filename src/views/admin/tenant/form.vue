@@ -4,56 +4,56 @@
       <el-form ref="dataFormRef" :model="form" :rules="dataRules" formDialogRef label-width="90px" v-loading="loading">
        <el-row :gutter="24">
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.name')" prop="name">
-        <el-input v-model="form.name" :placeholder="$t('teant.inputNameTip')"/>
+      <el-form-item :label="$t('tenant.name')" prop="name">
+        <el-input v-model="form.name" :placeholder="$t('tenant.inputNameTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.contactUserId')" prop="contactUserId">
-        <el-input v-model="form.contactUserId" :placeholder="$t('teant.inputContactUserIdTip')"/>
+      <el-form-item :label="$t('tenant.contactUserId')" prop="contactUserId">
+        <el-input v-model="form.contactUserId" :placeholder="$t('tenant.inputContactUserIdTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.contactName')" prop="contactName">
-        <el-input v-model="form.contactName" :placeholder="$t('teant.inputContactNameTip')"/>
+      <el-form-item :label="$t('tenant.contactName')" prop="contactName">
+        <el-input v-model="form.contactName" :placeholder="$t('tenant.inputContactNameTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.contactMobile')" prop="contactMobile">
-        <el-input v-model="form.contactMobile" :placeholder="$t('teant.inputContactMobileTip')"/>
+      <el-form-item :label="$t('tenant.contactMobile')" prop="contactMobile">
+        <el-input v-model="form.contactMobile" :placeholder="$t('tenant.inputContactMobileTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.status')" prop="status">
-        <el-input v-model="form.status" :placeholder="$t('teant.inputStatusTip')"/>
+      <el-form-item :label="$t('tenant.status')" prop="status">
+        <el-input v-model="form.status" :placeholder="$t('tenant.inputStatusTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.domain')" prop="domain">
-        <el-input v-model="form.domain" :placeholder="$t('teant.inputDomainTip')"/>
+      <el-form-item :label="$t('tenant.domain')" prop="domain">
+        <el-input v-model="form.domain" :placeholder="$t('tenant.inputDomainTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.packageId')" prop="packageId">
-        <el-input v-model="form.packageId" :placeholder="$t('teant.inputPackageIdTip')"/>
+      <el-form-item :label="$t('tenant.packageId')" prop="packageId">
+        <el-input v-model="form.packageId" :placeholder="$t('tenant.inputPackageIdTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.expireTime')" prop="expireTime">
-        <el-input v-model="form.expireTime" :placeholder="$t('teant.inputExpireTimeTip')"/>
+      <el-form-item :label="$t('tenant.expireTime')" prop="expireTime">
+        <el-input v-model="form.expireTime" :placeholder="$t('tenant.inputExpireTimeTip')"/>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('teant.accountCount')" prop="accountCount">
-        <el-input v-model="form.accountCount" :placeholder="$t('teant.inputAccountCountTip')"/>
+      <el-form-item :label="$t('tenant.accountCount')" prop="accountCount">
+        <el-input v-model="form.accountCount" :placeholder="$t('tenant.inputAccountCountTip')"/>
       </el-form-item>
       </el-col>
 
@@ -100,15 +100,15 @@ const form = reactive({
 
 // 定义校验规则
 const dataRules = ref({
-        name: [{required: true, message: t('teant.inputNameRule'), trigger: 'blur'}],
-        contactUserId: [{required: true, message: t('teant.inputContactUserIdRule'), trigger: 'blur'}],
-        contactName: [{required: true, message: t('teant.inputContactNameRule'), trigger: 'blur'}],
-        contactMobile: [{required: true, message: t('teant.inputContactMobileRule'), trigger: 'blur'}],
-        status: [{required: true, message: t('teant.inputStatusRule'), trigger: 'blur'}],
-        domain: [{required: true, message: t('teant.inputDomainRule'), trigger: 'blur'}],
-        packageId: [{required: true, message: t('teant.inputPackageIdRule'), trigger: 'blur'}],
-        expireTime: [{required: true, message: t('teant.inputExpireTimeRule'), trigger: 'blur'}],
-        accountCount: [{required: true, message: t('teant.inputAccountCountRule'), trigger: 'blur'}],
+        name: [{required: true, message: t('tenant.inputNameRule'), trigger: 'blur'}],
+        contactUserId: [{required: true, message: t('tenant.inputContactUserIdRule'), trigger: 'blur'}],
+        contactName: [{required: true, message: t('tenant.inputContactNameRule'), trigger: 'blur'}],
+        contactMobile: [{required: true, message: t('tenant.inputContactMobileRule'), trigger: 'blur'}],
+        status: [{required: true, message: t('tenant.inputStatusRule'), trigger: 'blur'}],
+        domain: [{required: true, message: t('tenant.inputDomainRule'), trigger: 'blur'}],
+        packageId: [{required: true, message: t('tenant.inputPackageIdRule'), trigger: 'blur'}],
+        expireTime: [{required: true, message: t('tenant.inputExpireTimeRule'), trigger: 'blur'}],
+        accountCount: [{required: true, message: t('tenant.inputAccountCountRule'), trigger: 'blur'}],
 })
 
 // 打开弹窗

@@ -1,5 +1,5 @@
 export default {
-   teant: {
+   tenant: {
         index: '#',
         importsysTenantTip: '导入租户表',
         id: '租户编号',
