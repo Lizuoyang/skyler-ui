@@ -93,7 +93,7 @@ const {
   sizeChangeHandle,
   sortChangeHandle,
   downBlobFile,
-	tableStyle
+  tableStyle
 } = useTable(state)
 
 // 清空搜索条件
@@ -116,7 +116,7 @@ const selectionChangHandle = (objs: { id: string }[]) => {
   multiple.value = !objs.length;
 };
 
-//表格内开关 (用户状态)
+//表格内开关
 const changeSwitch = async (row: object) => {
   await putObj(row);
   useMessage().success(t('common.optSuccessText'));

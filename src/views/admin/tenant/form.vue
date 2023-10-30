@@ -10,12 +10,6 @@
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('tenant.contactUserId')" prop="contactUserId">
-        <el-input v-model="form.contactUserId" :placeholder="$t('tenant.inputContactUserIdTip')"/>
-      </el-form-item>
-      </el-col>
-
-    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('tenant.contactName')" prop="contactName">
         <el-input v-model="form.contactName" :placeholder="$t('tenant.inputContactNameTip')"/>
       </el-form-item>
@@ -28,26 +22,23 @@
       </el-col>
 
     <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('tenant.status')" prop="status">
-        <el-input v-model="form.status" :placeholder="$t('tenant.inputStatusTip')"/>
-      </el-form-item>
-      </el-col>
-
-    <el-col :span="24" class="mb20">
-      <el-form-item :label="$t('tenant.domain')" prop="domain">
-        <el-input v-model="form.domain" :placeholder="$t('tenant.inputDomainTip')"/>
-      </el-form-item>
-      </el-col>
-
-    <el-col :span="24" class="mb20">
       <el-form-item :label="$t('tenant.packageId')" prop="packageId">
-        <el-input v-model="form.packageId" :placeholder="$t('tenant.inputPackageIdTip')"/>
+          <el-select :placeholder="$t('tenant.inputPackageIdTip')" class="w100" clearable v-model="form.packageId">
+              <el-option :key="item.id" :label="item.name" :value="item.id" v-for="item in tenantPackageList" />
+          </el-select>
       </el-form-item>
       </el-col>
 
     <el-col :span="24" class="mb20">
       <el-form-item :label="$t('tenant.expireTime')" prop="expireTime">
-        <el-input v-model="form.expireTime" :placeholder="$t('tenant.inputExpireTimeTip')"/>
+          <el-date-picker
+                  :end-placeholder="$t('tenant.inputExpireTimeTip')"
+                  :start-placeholder="$t('tenant.inputExpireTimeTip')"
+                  range-separator="To"
+                  type="datetime"
+                  v-model="form.expireTime"
+                  value-format="YYYY-MM-DD HH:mm:ss"
+          />
       </el-form-item>
       </el-col>
 
@@ -57,7 +48,13 @@
       </el-form-item>
       </el-col>
 
-			</el-row>
+           <el-col :span="24" class="mb20">
+               <el-form-item :label="$t('tenant.domain')" prop="domain">
+                   <el-input v-model="form.domain" :placeholder="$t('tenant.inputDomainTip')"/>
+               </el-form-item>
+           </el-col>
+
+       </el-row>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -72,8 +69,10 @@
 import { useDict } from '/@/hooks/dict';
 import { useMessage } from "/@/hooks/message";
 import { getObj, addObj, putObj } from '/@/api/admin/tenant'
+import { fetchTenantPackageAll } from '/@/api/admin/tenantPackge'
 import { rule } from '/@/utils/validate';
 import {useI18n} from 'vue-i18n';
+import {list as roleList} from "/@/api/admin/role";
 const emit = defineEmits(['refresh']);
 
 // 定义变量内容
@@ -98,17 +97,14 @@ const form = reactive({
 	  accountCount: '',
 });
 
+const tenantPackageList = ref<any[]>([]);
+
 // 定义校验规则
 const dataRules = ref({
         name: [{required: true, message: t('tenant.inputNameRule'), trigger: 'blur'}],
         contactUserId: [{required: true, message: t('tenant.inputContactUserIdRule'), trigger: 'blur'}],
         contactName: [{required: true, message: t('tenant.inputContactNameRule'), trigger: 'blur'}],
         contactMobile: [{required: true, message: t('tenant.inputContactMobileRule'), trigger: 'blur'}],
-        status: [{required: true, message: t('tenant.inputStatusRule'), trigger: 'blur'}],
-        domain: [{required: true, message: t('tenant.inputDomainRule'), trigger: 'blur'}],
-        packageId: [{required: true, message: t('tenant.inputPackageIdRule'), trigger: 'blur'}],
-        expireTime: [{required: true, message: t('tenant.inputExpireTimeRule'), trigger: 'blur'}],
-        accountCount: [{required: true, message: t('tenant.inputAccountCountRule'), trigger: 'blur'}],
 })
 
 // 打开弹窗
@@ -120,6 +116,8 @@ const openDialog = (id: string) => {
 	nextTick(() => {
 		dataFormRef.value?.resetFields();
 	});
+
+  getTenantPackageData();
 
   // 获取sysTenant信息
   if (id) {
@@ -156,6 +154,14 @@ const getsysTenantData = (id: string) => {
   }).finally(() => {
     loading.value = false
   })
+};
+
+// 租户套餐数据
+const getTenantPackageData = () => {
+    // 获取租户套餐列表
+    fetchTenantPackageAll().then(res => {
+        tenantPackageList.value = res.data
+    })
 };
 
 // 暴露变量

@@ -46,3 +46,10 @@ export const fetchTenantPackageTree = (tenantPackageId: string) => {
   });
 };
 
+export const fetchTenantPackageAll = () => {
+  return request({
+    url: '/admin/tenantPackge/all',
+    method: 'get',
+  });
+};
+

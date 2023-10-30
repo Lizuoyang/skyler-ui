@@ -124,7 +124,6 @@
             getsysTenantPackageData(id)
         }
 
-        loading.value = true;
         fetchTenantPackageTree(form.id ? form.id : '-1')
             .then((res) => {
                 checkedKeys.value = res.data;
@@ -134,9 +133,6 @@
                 state.treeData = r.data;
                 state.checkedKeys = other.resolveAllEunuchNodeId(state.treeData, checkedKeys.value, []);
             })
-            .finally(() => {
-                loading.value = false;
-            });
     };
 
     // 提交
