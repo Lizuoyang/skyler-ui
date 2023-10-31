@@ -124,12 +124,7 @@
             getsysTenantPackageData(id)
         }
 
-        fetchTenantPackageTree(form.id ? form.id : '-1')
-            .then((res) => {
-                checkedKeys.value = res.data;
-                return pageList();
-            })
-            .then((r) => {
+        pageList().then(r => {
                 state.treeData = r.data;
                 state.checkedKeys = other.resolveAllEunuchNodeId(state.treeData, checkedKeys.value, []);
             })
@@ -163,6 +158,7 @@
         loading.value = true
         getObj(id).then((res: any) => {
             Object.assign(form, res.data)
+            checkedKeys.value = form.menuIds.split(',');
         }).finally(() => {
             loading.value = false
         })
