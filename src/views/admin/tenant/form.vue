@@ -1,5 +1,5 @@
 <template>
-    <el-dialog :title="form.id ? $t('common.editBtn') : $t('common.addBtn')" v-model="visible"
+    <el-dialog :title="form.id ? $t('common.editBtn') : $t('common.addBtn')" v-model="visible" width="25%"
                :close-on-click-modal="false" draggable>
         <el-form ref="dataFormRef" :model="form" :rules="dataRules" formDialogRef label-width="90px"
                  v-loading="loading">
@@ -22,13 +22,13 @@
                     </el-form-item>
                 </el-col>
 
-                <el-col :span="24" class="mb20">
+                <el-col :span="24" class="mb20" v-if="form.id === undefined">
                     <el-form-item :label="$t('tenant.userName')" prop="userName">
                         <el-input v-model="form.userName" :placeholder="$t('tenant.inputUserNameTip')"/>
                     </el-form-item>
                 </el-col>
 
-                <el-col :span="24" class="mb20">
+                <el-col :span="24" class="mb20" v-if="form.id === undefined">
                     <el-form-item :label="$t('tenant.userPwd')" prop="userPwd">
                         <el-input v-model="form.userPwd" :placeholder="$t('tenant.inputUserPwdTip')" type="password"/>
                     </el-form-item>
@@ -112,6 +112,8 @@
         packageId: '',
         expireTime: '',
         accountCount: '',
+        userName: '',
+        userPwd: '',
     });
 
     const tenantPackageList = ref<any[]>([]);

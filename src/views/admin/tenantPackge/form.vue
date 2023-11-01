@@ -1,5 +1,5 @@
 <template>
-    <el-dialog :title="form.id ? $t('common.editBtn') : $t('common.addBtn')" v-model="visible"
+    <el-dialog :title="form.id ? $t('common.editBtn') : $t('common.addBtn')" v-model="visible" width="35%"
                :close-on-click-modal="false" draggable>
         <el-form ref="dataFormRef" :model="form" :rules="dataRules" formDialogRef label-width="90px"
                  v-loading="loading">
