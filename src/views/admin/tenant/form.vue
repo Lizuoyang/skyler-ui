@@ -22,13 +22,13 @@
                     </el-form-item>
                 </el-col>
 
-                <el-col :span="24" class="mb20" v-if="form.id === undefined">
+                <el-col :span="24" class="mb20" v-if="form.id == ''">
                     <el-form-item :label="$t('tenant.userName')" prop="userName">
                         <el-input v-model="form.userName" :placeholder="$t('tenant.inputUserNameTip')"/>
                     </el-form-item>
                 </el-col>
 
-                <el-col :span="24" class="mb20" v-if="form.id === undefined">
+                <el-col :span="24" class="mb20" v-if="form.id == ''">
                     <el-form-item :label="$t('tenant.userPwd')" prop="userPwd">
                         <el-input v-model="form.userPwd" :placeholder="$t('tenant.inputUserPwdTip')" type="password"/>
                     </el-form-item>
