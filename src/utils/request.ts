@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Session } from '/@/utils/storage';
+import {Local, Session} from '/@/utils/storage';
 import { useMessageBox } from '/@/hooks/message';
 import qs from 'qs';
 import other from './other';
@@ -15,6 +15,8 @@ const service: AxiosInstance = axios.create({
 	}
 });
 
+const tenantEnable = import.meta.env.VITE_TENANT_ENABLE
+
 /**
  * Axios请求拦截器，对请求进行处理
  * 1. 序列化get请求参数
@@ -28,6 +30,12 @@ service.interceptors.request.use(
 		const token = Session.getToken();
 		if (token && !config.headers?.skipToken) {
 			config.headers![CommonHeaderEnum.AUTHORIZATION] = `Bearer ${token}`;
+		}
+
+		// 设置租户
+		if (tenantEnable && tenantEnable === 'true') {
+			const tenantId = Session.getTenant()
+			if (tenantId) config.headers![CommonHeaderEnum.TENANT_ID] = tenantId
 		}
 
 		// 请求报文加密

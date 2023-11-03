@@ -10,6 +10,7 @@ export default {
 		two4: 'Links',
 	},
 	password: {
+		accountPlaceholder0: 'Please enter your tenant name',
 		accountPlaceholder1: 'The username "admin" is common, please use another',
 		accountPlaceholder2: 'Password',
 		accountPlaceholder3: 'Please enter the verification code',

@@ -71,6 +71,6 @@ export const Session = {
 	},
 	// 获取当前的租户
 	getTenant() {
-		return Local.get('tenantId') ? Local.get('tenantId') : 1;
+		return Local.get('tenantId') ? Local.get('tenantId') : 0;
 	},
 };

@@ -39,3 +39,10 @@ export function putObj(obj?: Object) {
   })
 }
 
+// 使用租户名，获得租户编号
+export const getTenantIdByName = (name: string) => {
+  return request({
+    url: '/admin/tenant/get-id-by-name?name=' + name,
+    method: 'get'
+  })
+}

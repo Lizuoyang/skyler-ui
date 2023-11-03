@@ -11,6 +11,7 @@ export default {
 		two4: '友情链接',
 	},
 	password: {
+		accountPlaceholder0: '请输入租户名称',
 		accountPlaceholder1: '请输入用户名',
 		accountPlaceholder2: '请输入密码',
 		accountPlaceholder3: '请输入验证码',
