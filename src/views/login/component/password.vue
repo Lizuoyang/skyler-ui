@@ -1,16 +1,6 @@
 <template>
   <el-form size="large" class="login-content-form" ref="loginFormRef" :rules="loginRules" :model="state.ruleForm"
            @keyup.enter="onSignIn">
-    <el-form-item class="login-animation1" prop="tenantName" v-if="tenantEnable">
-      <el-input text :placeholder="$t('password.accountPlaceholder0')" v-model="state.ruleForm.tenantName" clearable
-                autocomplete="off">
-        <template #prefix>
-          <el-icon class="el-input__icon">
-            <ele-Guide />
-          </el-icon>
-        </template>
-      </el-input>
-    </el-form-item>
     <el-form-item class="login-animation1" prop="username">
       <el-input text :placeholder="$t('password.accountPlaceholder1')" v-model="state.ruleForm.username" clearable
                 autocomplete="off">
@@ -23,10 +13,10 @@
     </el-form-item>
     <el-form-item class="login-animation2" prop="password">
       <el-input
-          :type="state.isShowPassword ? 'text' : 'password'"
-          :placeholder="$t('password.accountPlaceholder2')"
-          v-model="state.ruleForm.password"
-          autocomplete="off"
+              :type="state.isShowPassword ? 'text' : 'password'"
+              :placeholder="$t('password.accountPlaceholder2')"
+              v-model="state.ruleForm.password"
+              autocomplete="off"
       >
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -35,9 +25,9 @@
         </template>
         <template #suffix>
           <i
-              class="iconfont el-input__icon login-content-password"
-              :class="state.isShowPassword ? 'icon-yincangmima' : 'icon-xianshimima'"
-              @click="state.isShowPassword = !state.isShowPassword"
+                  class="iconfont el-input__icon login-content-password"
+                  :class="state.isShowPassword ? 'icon-yincangmima' : 'icon-xianshimima'"
+                  @click="state.isShowPassword = !state.isShowPassword"
           >
           </i>
         </template>
@@ -69,80 +59,62 @@
 </template>
 
 <script setup lang="ts" name="password">
-import {reactive, ref, defineEmits} from 'vue';
-import {useUserInfo} from '/@/stores/userInfo';
-import {useI18n} from 'vue-i18n';
-import {generateUUID} from "/@/utils/other";
-import { getTenantIdByName } from '/@/api/admin/tenant'
-import {Local} from "/@/utils/storage";
-// 使用国际化插件
-const {t} = useI18n();
+  import {reactive, ref, defineEmits} from 'vue';
+  import {useUserInfo} from '/@/stores/userInfo';
+  import {useI18n} from 'vue-i18n';
+  import {generateUUID} from "/@/utils/other";
 
-// 定义变量内容
-const emit = defineEmits(['signInSuccess']); // 声明事件名称
-const loginFormRef = ref(); // 定义LoginForm表单引用
-const loading = ref(false); // 定义是否正在登录中
-const state = reactive({
-  isShowPassword: false, // 是否显示密码
-  ruleForm: {
-    // 表单数据
-    tenantName: '系统租户',
-    username: 'admin', // 用户名
-    password: '123456', // 密码
-    code: '', // 验证码
-    randomStr: '', // 验证码随机数
-  },
-});
+  // 使用国际化插件
+  const {t} = useI18n();
 
-const loginRules = reactive({
-  tenantName: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder0')}], // 租户名校验规则
-  username: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder1')}], // 用户名校验规则
-  password: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder2')}], // 密码校验规则
-  code: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder3')}], // 验证码校验规则
-});
+  // 定义变量内容
+  const emit = defineEmits(['signInSuccess']); // 声明事件名称
+  const loginFormRef = ref(); // 定义LoginForm表单引用
+  const loading = ref(false); // 定义是否正在登录中
+  const state = reactive({
+    isShowPassword: false, // 是否显示密码
+    ruleForm: {
+      // 表单数据
+      username: 'admin', // 用户名
+      password: '123456', // 密码
+      code: '', // 验证码
+      randomStr: '', // 验证码随机数
+    },
+  });
 
-// 是否开启验证码
-const verifyEnable = ref(import.meta.env.VITE_VERIFY_ENABLE === 'true');
-// 是否开启多租户
-const tenantEnable = ref(import.meta.env.VITE_TENANT_ENABLE === 'true');
+  const loginRules = reactive({
+    username: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder1')}], // 用户名校验规则
+    password: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder2')}], // 密码校验规则
+    code: [{required: true, trigger: 'blur', message: t('password.accountPlaceholder3')}], // 验证码校验规则
+  });
 
-const imgSrc = ref('')
+  // 是否开启验证码
+  const verifyEnable = ref(import.meta.env.VITE_VERIFY_ENABLE === 'true');
+  const imgSrc = ref('')
 
-//获取验证码图片
-const getVerifyCode = () => {
-  state.ruleForm.randomStr = generateUUID()
-  imgSrc.value = `${import.meta.env.VITE_API_URL}/code?randomStr=${state.ruleForm.randomStr}`
-}
-
-//获取租户ID
-const getTenantId = async () => {
-  if (tenantEnable) {
-    const res = await getTenantIdByName(state.ruleForm.tenantName)
-    Local.set('tenantId', res.data)
-    console.log("getTenantId: ", res)
+  //获取验证码图片
+  const getVerifyCode = () => {
+    state.ruleForm.randomStr = generateUUID()
+    imgSrc.value = `${import.meta.env.VITE_API_URL}/code?randomStr=${state.ruleForm.randomStr}`
   }
-}
 
-// 账号密码登录
-const onSignIn = async () => {
-  const valid = await loginFormRef.value.validate().catch(() => {}); // 表单校验
-  if (!valid) return false;
+  // 账号密码登录
+  const onSignIn = async () => {
+    const valid = await loginFormRef.value.validate().catch(() => {}); // 表单校验
+    if (!valid) return false;
 
-  loading.value = true; // 正在登录中
-  try {
-    // 根据租户名称获取租户id并设置到请求头中
-    await getTenantId()
+    loading.value = true; // 正在登录中
+    try {
+      await useUserInfo().login(state.ruleForm); // 调用登录方法
+      emit('signInSuccess'); // 触发事件
+    } finally {
+      getVerifyCode()
+      loading.value = false; // 登录结束
+    }
+  };
 
-    await useUserInfo().login(state.ruleForm); // 调用登录方法
-    emit('signInSuccess'); // 触发事件
-  } finally {
+  onMounted(() => {
     getVerifyCode()
-    loading.value = false; // 登录结束
-  }
-};
-
-onMounted(() => {
-  getVerifyCode()
-})
+  })
 
 </script>
